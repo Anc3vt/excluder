@@ -1,0 +1,2 @@
+# excluder
+File/directory excluder
