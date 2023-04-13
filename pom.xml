@@ -73,16 +73,9 @@
 
     <dependencies>
         <dependency>
-            <groupId>org.junit.jupiter</groupId>
-            <artifactId>junit-jupiter-api</artifactId>
-            <version>${junit-jupiter-api.version}</version>
-            <scope>test</scope>
-        </dependency>
-        <dependency>
-            <groupId>org.hamcrest</groupId>
-            <artifactId>hamcrest-junit</artifactId>
-            <version>${hamcrest-junit.version}</version>
-            <scope>test</scope>
+            <groupId>org.projectlombok</groupId>
+            <artifactId>lombok</artifactId>
+            <version>1.18.26</version>
         </dependency>
         <dependency>
             <groupId>com.fasterxml.jackson.core</groupId>
@@ -102,12 +95,25 @@
         <dependency>
             <groupId>com.ancevt.util</groupId>
             <artifactId>local-storage</artifactId>
-            <version>1.1.2</version>
+            <version>1.1.3</version>
         </dependency>
         <dependency>
             <groupId>com.ancevt.util</groupId>
             <artifactId>args</artifactId>
             <version>2.1.0</version>
+        </dependency>
+
+        <dependency>
+            <groupId>org.junit.jupiter</groupId>
+            <artifactId>junit-jupiter-api</artifactId>
+            <version>${junit-jupiter-api.version}</version>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.hamcrest</groupId>
+            <artifactId>hamcrest-junit</artifactId>
+            <version>${hamcrest-junit.version}</version>
+            <scope>test</scope>
         </dependency>
     </dependencies>
 
