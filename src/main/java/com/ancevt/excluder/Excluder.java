@@ -23,6 +23,7 @@ import com.ancevt.excluder.command.CommandClear;
 import com.ancevt.excluder.command.CommandExclude;
 import com.ancevt.excluder.command.CommandHere;
 import com.ancevt.excluder.command.CommandList;
+import com.ancevt.excluder.command.CommandObject;
 import com.ancevt.excluder.util.DirectoryUtil;
 import com.ancevt.excluder.util.PrintUtil;
 import com.ancevt.util.args.Args;
@@ -40,9 +41,10 @@ public class Excluder {
     private static final Map<String, Pair> commandMap = Map.ofEntries(
             entry("help", new Pair(Excluder::help, "list of Excluder commands")),
             entry("list", new Pair(new CommandList(), "list of excluded objects")),
-            entry("e", new Pair(new CommandExclude(), "exclude object")),
-            entry("b", new Pair(new CommandBack(), "back object")),
-            entry("h", new Pair(new CommandHere(), "list of excluded objects in current directory")),
+            entry("ex", new Pair(new CommandExclude(), "exclude object")),
+            entry("back", new Pair(new CommandBack(), "quick back object")),
+            entry("object", new Pair(new CommandObject(), "back object exactly")),
+            entry("here", new Pair(new CommandHere(), "list of excluded objects in current directory")),
             entry("clear", new Pair(new CommandClear(), "clear objects"))
     );
 

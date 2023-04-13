@@ -19,6 +19,8 @@ package com.ancevt.excluder.util;
 
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
+import java.util.zip.DataFormatException;
 
 public class LocalDateTimeUtil {
 
@@ -34,6 +36,15 @@ public class LocalDateTimeUtil {
 
     public static LocalDateTime stringToLocalDateTime(String dateTimeString) {
         return LocalDateTime.parse(dateTimeString, DATE_TIME_FORMATTER);
+    }
+
+    public static boolean isLocalDateTime(String string) {
+        try {
+            LocalDateTime.parse(string, DATE_TIME_FORMATTER);
+        } catch (DateTimeParseException e) {
+            return false;
+        }
+        return true;
     }
 }
 

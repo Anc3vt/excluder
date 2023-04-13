@@ -13,6 +13,8 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.Map;
 
+import static com.ancevt.excluder.command.Utils.deleteDirectory;
+
 public class CommandClear implements Command {
 
     private static final ObjectMapper objectMapper = new ObjectMapper();
@@ -31,7 +33,11 @@ public class CommandClear implements Command {
                     objectList.forEach(object -> {
                         try {
                             Path pathToDelete = dateDir.resolve(object);
-                            if(Files.deleteIfExists(pathToDelete)) {
+
+                            if (Files.isDirectory(pathToDelete)) {
+                                deleteDirectory(pathToDelete);
+                                PrintUtil.print("deleted " + pathToDelete);
+                            } else if (Files.deleteIfExists(pathToDelete)) {
                                 PrintUtil.print("deleted " + pathToDelete);
                             }
                         } catch (IOException e) {

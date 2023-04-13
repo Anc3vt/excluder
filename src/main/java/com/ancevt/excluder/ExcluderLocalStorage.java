@@ -17,7 +17,7 @@
  */
 package com.ancevt.excluder;
 
-import com.ancevt.localstorage.EncryptedFileLocalStorage;
+import com.ancevt.localstorage.FileLocalStorage;
 import com.ancevt.localstorage.LocalStorage;
 import com.ancevt.localstorage.LocalStorageBuilder;
 
@@ -28,7 +28,7 @@ public class ExcluderLocalStorage {
     public static LocalStorage localStorage() {
         return localStorage == null ?
                 localStorage = LocalStorageBuilder
-                        .builder(EncryptedFileLocalStorage.class, ExcluderLocalStorage.class.getName())
+                        .builder(FileLocalStorage.class, ExcluderLocalStorage.class.getName())
                         .storageId(ExcluderLocalStorage.class.getName())
                         .saveOnWrite(true)
                         .build() : localStorage;
