@@ -1,3 +1,20 @@
+/**
+ * Copyright (C) 2023 the original author or authors.
+ * See the notice.md file distributed with this work for additional
+ * information regarding copyright ownership.
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ * http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
 package com.ancevt.excluder.command;
 
 import com.ancevt.excluder.ExcluderLocalStorage;
@@ -15,9 +32,8 @@ import java.nio.file.Path;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
-import java.util.TreeMap;
+import java.util.SortedMap;
 import java.util.concurrent.atomic.AtomicBoolean;
-import java.util.stream.Stream;
 
 import static com.ancevt.excluder.command.Utils.extractParentDirName;
 import static com.ancevt.excluder.command.Utils.isDirectoryEmpty;
@@ -69,8 +85,18 @@ public class CommandBack implements Command {
                     String entryString = localStorage.getString(DirectoryUtil.currentDirectory().toString());
                     if (entryString != null) {
                         Entry entry = new ObjectMapper().readValue(entryString, Entry.class);
-                        entry.getData().get(dateDirName).remove(object);
-                        localStorage.put(DirectoryUtil.currentDirectory().toString(), new ObjectMapper().writeValueAsString(entry));
+                        Map<String, List<String>> entryData = entry.getData();
+                        List<String> entryDataList = entryData.get(dateDirName);
+                        entryDataList.remove(object);
+                        if (entryDataList.isEmpty()) {
+                            entryData.remove(dateDirName);
+                        }
+
+                        if (entryData.isEmpty()) {
+                            localStorage.remove(DirectoryUtil.currentDirectory().toString());
+                        } else {
+                            localStorage.put(DirectoryUtil.currentDirectory().toString(), new ObjectMapper().writeValueAsString(entry));
+                        }
 
                         Path p = DirectoryUtil.currentDirectory().resolve(object);
                         Files.move(path, p);

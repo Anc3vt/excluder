@@ -27,6 +27,7 @@ public class CommandList implements Command {
     public void apply(Args args) {
         LocalStorage ls = ExcluderLocalStorage.localStorage();
         String prefix = args.get(String.class, 1, "");
+
         PrintUtil.printMapAsTextTable("Path", "Data", ls.toSortedMapGroup(prefix));
     }
 }

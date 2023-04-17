@@ -29,7 +29,7 @@ public class PrintUtil {
 
     public static <T> void printMapAsTextTable(String key, String value, Map<String, T> map) {
         TextTable textTable = new TextTable(false, key, value);
-        map.forEach(textTable::addRow);
+        map.forEach((cells, cells2) -> textTable.addRow(cells, cells2));
         PrintUtil.print(textTable.render());
     }
 }

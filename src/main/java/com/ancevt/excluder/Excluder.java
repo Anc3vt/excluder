@@ -24,7 +24,6 @@ import com.ancevt.excluder.command.CommandExclude;
 import com.ancevt.excluder.command.CommandHere;
 import com.ancevt.excluder.command.CommandList;
 import com.ancevt.excluder.command.CommandObject;
-import com.ancevt.excluder.util.DirectoryUtil;
 import com.ancevt.excluder.util.PrintUtil;
 import com.ancevt.util.args.Args;
 
@@ -39,20 +38,16 @@ public class Excluder {
     }
 
     private static final Map<String, Pair> commandMap = Map.ofEntries(
-            entry("help", new Pair(Excluder::help, "list of Excluder commands")),
-            entry("list", new Pair(new CommandList(), "list of excluded objects")),
-            entry("ex", new Pair(new CommandExclude(), "exclude object")),
-            entry("back", new Pair(new CommandBack(), "quick back object")),
-            entry("object", new Pair(new CommandObject(), "back object exactly")),
-            entry("here", new Pair(new CommandHere(), "list of excluded objects in current directory")),
-            entry("clear", new Pair(new CommandClear(), "clear objects"))
+            entry("help",   new Pair(Excluder::help,       "list of Excluder commands")),
+            entry("list",   new Pair(new CommandList(),    "list of excluded objects")),
+            entry("ex",     new Pair(new CommandExclude(), "exclude object")),
+            entry("back",   new Pair(new CommandBack(),    "quick back object")),
+            entry("object", new Pair(new CommandObject(),  "back object exactly")),
+            entry("here",   new Pair(new CommandHere(),    "list of excluded objects in current directory")),
+            entry("clear",  new Pair(new CommandClear(),   "clear objects"))
     );
 
     public Excluder(Args args) {
-        if (args.contains("-d")) {
-            System.out.println(DirectoryUtil.currentDirectory());
-        }
-
         String commandString = args.get(String.class, 0, "help");
         Pair p = commandMap.get(commandString);
         if (p != null) {
