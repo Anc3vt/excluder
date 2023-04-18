@@ -6,7 +6,7 @@
 
     <groupId>com.ancevt.excluder</groupId>
     <artifactId>excluder</artifactId>
-    <version>1.0.0</version>
+    <version>1.0.1</version>
 
     <name>File/directory excluder</name>
 

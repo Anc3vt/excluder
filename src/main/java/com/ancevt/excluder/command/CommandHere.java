@@ -40,7 +40,7 @@ public class CommandHere implements Command{
 
                 TextTable textTable = new TextTable(false, "Date", "Files");
                 entry.getData().forEach(textTable::addRow);
-                PrintUtil.print(textTable.render());
+                PrintUtil.println(textTable.render());
 
             } catch (JsonProcessingException e) {
                 throw new RuntimeException(e);

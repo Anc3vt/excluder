@@ -55,7 +55,7 @@ public class CommandExclude implements Command {
                 if (Files.exists(sourcePath)) {
                     objectList.add(object);
                 } else {
-                    PrintUtil.print("Object " + sourcePath + " does not exist");
+                    PrintUtil.println("Object " + sourcePath + " does not exist");
                 }
             }
 
@@ -76,9 +76,9 @@ public class CommandExclude implements Command {
                     Path targetPath = storageTargetDir.resolve(object);
                     if (Files.exists(sourcePath)) {
                         Files.move(sourcePath, targetPath);
-                        PrintUtil.print(object + " -> " + targetPath);
+                        PrintUtil.println(object + " -> " + targetPath);
                     } else {
-                        PrintUtil.print("Object " + sourcePath + " does not exist");
+                        PrintUtil.println("Object " + sourcePath + " does not exist");
                     }
                 } catch (IOException e) {
                     throw new RuntimeException(e);

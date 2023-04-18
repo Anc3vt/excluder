@@ -18,9 +18,14 @@
 package com.ancevt.excluder.command;
 
 import com.ancevt.excluder.ExcluderLocalStorage;
+import com.ancevt.excluder.model.Entry;
+import com.ancevt.excluder.util.JsonUtil;
 import com.ancevt.excluder.util.PrintUtil;
 import com.ancevt.localstorage.LocalStorage;
 import com.ancevt.util.args.Args;
+
+import java.util.List;
+import java.util.Map;
 
 public class CommandList implements Command {
     @Override
@@ -28,6 +33,13 @@ public class CommandList implements Command {
         LocalStorage ls = ExcluderLocalStorage.localStorage();
         String prefix = args.get(String.class, 1, "");
 
-        PrintUtil.printMapAsTextTable("Path", "Data", ls.toSortedMapGroup(prefix));
+        Map<String, String> map = ls.toSortedMapGroup(prefix);
+
+        map.forEach((location, jsonString) -> {
+            Entry entry = JsonUtil.toEntry(jsonString);
+            Map<String, List<String>> data = entry.getData();
+            PrintUtil.println(location);
+            data.forEach((k, objectList) -> PrintUtil.println("   " + k + ": " + String.join(", ", objectList)));
+        });
     }
 }

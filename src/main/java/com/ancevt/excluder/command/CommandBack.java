@@ -32,7 +32,6 @@ import java.nio.file.Path;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
-import java.util.SortedMap;
 import java.util.concurrent.atomic.AtomicBoolean;
 
 import static com.ancevt.excluder.command.Utils.extractParentDirName;
@@ -46,7 +45,7 @@ public class CommandBack implements Command {
     @Override
     public void apply(Args args) {
         if (!localStorage.contains(DirectoryUtil.currentDirectory().toAbsolutePath().toString())) {
-            PrintUtil.print("No excluded objects here");
+            PrintUtil.println("No excluded objects here");
             return;
         }
 
@@ -61,11 +60,11 @@ public class CommandBack implements Command {
         Map<String, List<String>> multiplicityState = multiplicityState(objectList);
         multiplicityState.forEach((object, list) -> {
             if (list.size() > 1) {
-                PrintUtil.print(object + ":");
+                PrintUtil.println(object + ":");
 
                 list.forEach(pathString -> {
                     if (!LocalDateTimeUtil.isLocalDateTime(Path.of(pathString).getFileName().toString())) {
-                        PrintUtil.print("   " + pathString);
+                        PrintUtil.println("   " + pathString);
                     }
                 });
 
@@ -74,7 +73,7 @@ public class CommandBack implements Command {
         });
 
         if (multiplicityFound.get()) {
-            PrintUtil.print("\nUse: edr object <object> <part_of_path>");
+            PrintUtil.println("\nUse: edr object <object> <part_of_path>");
         } else {
             multiplicityState.forEach((object, list) -> {
                 String pathString = list.get(0);
@@ -101,7 +100,7 @@ public class CommandBack implements Command {
                         Path p = DirectoryUtil.currentDirectory().resolve(object);
                         Files.move(path, p);
 
-                        PrintUtil.print(path + " -> " + object);
+                        PrintUtil.println(path + " -> " + object);
 
                         if (isDirectoryEmpty(path.getParent())) {
                             Files.deleteIfExists(path.getParent());

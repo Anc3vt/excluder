@@ -53,9 +53,9 @@ public class CommandClear implements Command {
 
                             if (Files.isDirectory(pathToDelete)) {
                                 deleteDirectory(pathToDelete);
-                                PrintUtil.print("deleted " + pathToDelete);
+                                PrintUtil.println("deleted " + pathToDelete);
                             } else if (Files.deleteIfExists(pathToDelete)) {
-                                PrintUtil.print("deleted " + pathToDelete);
+                                PrintUtil.println("deleted " + pathToDelete);
                             }
                         } catch (IOException e) {
                             throw new RuntimeException(e);

@@ -17,23 +17,18 @@
  */
 package com.ancevt.excluder.util;
 
-import com.ancevt.util.texttable.TextTable;
+import com.ancevt.excluder.model.Entry;
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
 
-import java.util.Map;
+public class JsonUtil {
 
-public class PrintUtil {
-
-    public static void println(Object o) {
-        System.out.println(o);
+    public static Entry toEntry(String jsonString) {
+        try {
+            return new ObjectMapper().readValue(jsonString, Entry.class);
+        } catch (JsonProcessingException e) {
+            throw new RuntimeException(e);
+        }
     }
 
-    public static void print(Object o) {
-        System.out.print(o);
-    }
-
-    public static <T> void printMapAsTextTable(String key, String value, Map<String, T> map) {
-        TextTable textTable = new TextTable(false, key, value);
-        map.forEach((cells, cells2) -> textTable.addRow(cells, cells2));
-        PrintUtil.println(textTable.render());
-    }
 }

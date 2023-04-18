@@ -82,7 +82,7 @@ public class CommandObject implements Command {
             filesToMove.forEach((k, v) -> {
                 try {
                     Files.move(k, v);
-                    PrintUtil.print(k + " -> " + object);
+                    PrintUtil.println(k + " -> " + object);
 
                     if (isDirectoryEmpty(k.getParent())) {
                         Files.deleteIfExists(k.getParent());

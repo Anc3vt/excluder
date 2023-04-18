@@ -59,7 +59,7 @@ public class Excluder {
     }
 
     private static void help(Args args) {
-        commandMap.forEach((k, v) -> PrintUtil.print(k + "\t" + v.help()));
+        commandMap.forEach((k, v) -> PrintUtil.println(k + "\t" + v.help()));
     }
 
     private record Pair(Command command, String help) {
